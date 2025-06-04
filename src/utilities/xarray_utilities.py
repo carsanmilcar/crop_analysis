@@ -71,7 +71,15 @@ def add_children_to_parent(
 
 
 def affine_has_rotation(affine: Affine) -> bool:
-    return affine.b == affine.d != 0
+    """Return ``True`` if the affine transform has rotation or shear.
+
+    ``Affine`` objects encode rotation and shear in the ``b`` and ``d``
+    parameters.  If both are zero then the transform is purely scaling and
+    translation.  The previous implementation incorrectly required ``b`` and
+    ``d`` to be equal and non–zero, which fails for many valid transforms.
+    """
+
+    return not (affine.b == 0 and affine.d == 0)
 
 
 def affine_to_coords(
