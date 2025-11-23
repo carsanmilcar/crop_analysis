@@ -1,5 +1,7 @@
 .venv/
 data_inputs/
 
+.env
+
 
 *.zarr
